@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th style>Name</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                    <td><strong>{{ totalassets | usd}}</strong></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    {% if stocks %}
+                        {% for stock in stocks %}
+                            <tr>
+                                <td>{{ stock.symbol }}</td>
+                                <td>{{ stock.company }}</td>
+                                <td>{{ stock.shares }}</td>
+                                <td>{{ stock.currentprice | usd }}</td>
+                                <td>{{ stock.assetvalue | usd }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    <tr>
+                        <td>CASH</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ cash | usd}}</td>
+                    </tr>
+                </tr>
+            </tbody>
+        </table>
+{% endblock %}
